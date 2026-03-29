@@ -1,0 +1,7 @@
+# No external dependencies needed for core scripts - uses stdlib only
+# BRAVE_API_KEY must be set in environment
+# ANTHROPIC_API_KEY must be set for outreach_generator.py (optional - falls back to template)
+
+# Optional: install for faster HTML parsing in backlink_finder/outreach_generator
+requests
+beautifulsoup4

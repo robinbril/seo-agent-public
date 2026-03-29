@@ -1,0 +1,15 @@
+{
+  "site_name": "Your Site Name",
+  "domain": "yoursite.com",
+  "niche": "your niche here",
+  "target_keywords": ["keyword 1", "keyword 2"],
+  "target_location": "Your City",
+  "competitors": [],
+  "brave_api_key_env": "BRAVE_API_KEY",
+  "language": "nl",
+  "serp_location": "nl",
+  "weekly_tracking_day": "monday",
+  "content_output_dir": "content/",
+  "briefs_output_dir": "briefs/",
+  "rankings_dir": "rankings/"
+}
