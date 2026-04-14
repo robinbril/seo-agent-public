@@ -35,7 +35,7 @@ def brave_search(query: str, api_key: str, count: int = 20) -> list[dict]:
         print(f"  Error: {e}")
         return []
 
-def get_position(domain: str, results: list) -> int | None:
+def get_position(domain: str, results: list):
     for i, r in enumerate(results, 1):
         if domain.lower() in r.get("url", "").lower():
             return i

@@ -31,7 +31,6 @@ def brave_search(query: str, api_key: str, count: int = 10) -> list[dict]:
     url = f"https://api.search.brave.com/res/v1/web/search?{params}"
     req = urllib.request.Request(url, headers={
         "Accept": "application/json",
-        "Accept-Encoding": "gzip",
         "X-Subscription-Token": api_key,
     })
     try:
@@ -42,7 +41,7 @@ def brave_search(query: str, api_key: str, count: int = 10) -> list[dict]:
         print(f"  Search error: {e}")
         return []
 
-def check_domain_ranks(domain: str, keyword: str, results: list[dict]) -> int | None:
+def check_domain_ranks(domain: str, keyword: str, results: list):
     """Return position (1-based) if domain ranks, else None."""
     for i, r in enumerate(results, 1):
         if domain.lower() in r.get("url", "").lower():
