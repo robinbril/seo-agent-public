@@ -162,6 +162,16 @@ Geef site mee bij commando's:
 Per klant worden MCP servers `meta-ads-<client>` en `google-ads-<client>`
 ingeladen via `.mcp.json`. Setup: `docs/ADS-MCP-SETUP.md`.
 
+Project-scoped skills (auto-laden in elke sessie):
+- `launch-google-search-ad` — nieuwe keyword search campagne
+- `launch-instagram-story-ad` — nieuwe IG Stories ad (9:16)
+- `ads-daily-check` — dagelijkse performance snapshot
+- `pause-ad` — veilig pauzeren
+- `adjust-ad-budget` — budget wijzigen
+
+Per-klant metadata (ad account ID, page ID, default targeting, etc.)
+staat in `sites/<client>/ads-config.json`. Skills lezen die automatisch.
+
 ### 📊 Ads Performance Check
 ```
 Check ads performance for [client] last [N] days

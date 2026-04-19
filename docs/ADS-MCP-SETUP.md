@@ -166,7 +166,7 @@ claude mcp add --scope user \
   --env GOOGLE_ADS_CLIENT_SECRET=$GOOGLE_ADS_CLIENT_SECRET \
   --env GOOGLE_ADS_REFRESH_TOKEN=$GOOGLE_ADS_REFRESH_TOKEN \
   --env GOOGLE_ADS_LOGIN_CUSTOMER_ID=$TPZ_GOOGLE_ADS_CUSTOMER_ID \
-  google-ads-tpzuyderhoven -- uvx --from git+https://github.com/itallstartedwithaidea/google-ads-mcp google-ads-mcp
+  google-ads-tpzuyderhoven -- uvx --from git+https://github.com/itallstartedwithaidea/google-ads-mcp gads-mcp
 ```
 
 ---
@@ -207,7 +207,7 @@ Patroon per nieuwe klant — vervang `<client>` door een korte ID (bv. `acme`):
    },
    "google-ads-<client>": {
      "command": "uvx",
-     "args": ["--from", "git+https://github.com/itallstartedwithaidea/google-ads-mcp", "google-ads-mcp"],
+     "args": ["--from", "git+https://github.com/itallstartedwithaidea/google-ads-mcp", "gads-mcp"],
      "env": {
        "GOOGLE_ADS_DEVELOPER_TOKEN": "${GOOGLE_ADS_DEVELOPER_TOKEN}",
        "GOOGLE_ADS_CLIENT_ID": "${GOOGLE_ADS_CLIENT_ID}",

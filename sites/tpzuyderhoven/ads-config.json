@@ -1,0 +1,70 @@
+{
+  "_comment": "Per-client ads metadata. Skills read this automatically. All sensitive IDs go here (NOT secrets — those are in .env). Fill in after running docs/ADS-MCP-SETUP.md.",
+  "client": "tpzuyderhoven",
+  "meta": {
+    "ad_account_id": "act_REPLACE_WITH_AD_ACCOUNT_ID",
+    "page_id": "REPLACE_WITH_FACEBOOK_PAGE_ID",
+    "instagram_actor_id": "REPLACE_WITH_IG_ACCOUNT_ID",
+    "business_manager_id": "REPLACE_WITH_BM_ID"
+  },
+  "google_ads": {
+    "customer_id": "REPLACE_WITH_10_DIGIT_CUSTOMER_ID",
+    "currency": "EUR",
+    "time_zone": "Europe/Amsterdam"
+  },
+  "default_daily_budget_eur": 3,
+  "max_daily_budget_eur": 25,
+  "default_targeting": {
+    "countries": ["NL"],
+    "cities": [
+      "Amstelveen",
+      "Aalsmeer",
+      "Uithoorn",
+      "Kudelstaart",
+      "De Kwakel"
+    ],
+    "radius_km": 10,
+    "languages": ["nl", "en"],
+    "age_min": 25,
+    "age_max": 65,
+    "genders": "all"
+  },
+  "default_landing_urls": {
+    "search": "https://www.tpzuyderhoven.nl/inschrijven",
+    "instagram": "https://www.tpzuyderhoven.nl/inschrijven",
+    "homepage": "https://www.tpzuyderhoven.nl"
+  },
+  "conversion_actions": {
+    "_comment": "Fill in after setting up conversion tracking in both platforms.",
+    "google_ads_lead_conversion_id": null,
+    "meta_lead_pixel_event": null
+  },
+  "common_negative_keywords": [
+    "vacature",
+    "vacatures",
+    "jobs",
+    "werken bij",
+    "stage",
+    "opleiding",
+    "studie",
+    "gratis"
+  ],
+  "creative_guidelines": {
+    "_comment": "Feeds skills that draft ad copy. Aligned with brand.md.",
+    "brand_name": "Tandartspraktijk Zuyderhoven",
+    "tone": "Warm, professioneel, laagdrempelig — geen jargon",
+    "primary_cta": "Schrijf je in",
+    "secondary_cta": "Maak een afspraak",
+    "usps": [
+      "Zaterdag open",
+      "Gratis parkeren",
+      "Nieuwe patiënten welkom",
+      "5 min vanaf Aalsmeer"
+    ],
+    "avoid": [
+      "Overdreven medische claims",
+      "Prijsvergelijkingen met concurrenten",
+      "Garanties over behandeluitkomsten"
+    ]
+  }
+}

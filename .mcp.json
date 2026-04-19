@@ -15,7 +15,7 @@
       "args": [
         "--from",
         "git+https://github.com/itallstartedwithaidea/google-ads-mcp",
-        "google-ads-mcp"
+        "gads-mcp"
       ],
       "env": {
         "GOOGLE_ADS_DEVELOPER_TOKEN": "${GOOGLE_ADS_DEVELOPER_TOKEN}",
