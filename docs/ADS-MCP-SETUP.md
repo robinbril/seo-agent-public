@@ -36,7 +36,7 @@ Verify: `claude --version`, `node --version`, `uvx --version`.
 ### 1a · Meta developer app (éénmalig, gedeeld voor alle klanten)
 
 1. Ga naar https://developers.facebook.com/apps/ → **Create App** → type
-   **Business** → app naam bv. `robin-ads-agent`.
+   **Business** → app naam (kies vrij, bv. `marketing-engine`).
 2. In de app: **Add Product** → **Marketing API**.
 3. **App Settings → Basic** → kopieer `App ID` en `App Secret`. Vul in
    `.env` onder `META_APP_ID` / `META_APP_SECRET`.
@@ -56,8 +56,8 @@ Business Manager.
    naam `claude-code-agent` → Role **Admin**.
 4. **Assign Assets** → voeg toe: de **Ad Account** + de **Facebook Page** van
    de praktijk → permission **Manage**.
-5. **Generate New Token** → selecteer jouw Meta app (`robin-ads-agent`) →
-   permissions aanvinken: `ads_management`, `ads_read`, `business_management`,
+5. **Generate New Token** → selecteer jouw Meta app → permissions
+   aanvinken: `ads_management`, `ads_read`, `business_management`,
    `pages_read_engagement`, `pages_manage_ads` → **Generate**.
 6. Kopieer het token → `.env` onder `TPZ_META_ACCESS_TOKEN=…`.
 
@@ -68,7 +68,7 @@ klant-ad-accounts. We maken daar een OAuth app bij zodat Claude namens die
 account kan inloggen.
 
 1. **Google Cloud Console** → https://console.cloud.google.com → nieuw
-   project `robin-ads-agent` → **APIs & Services** → **Enable APIs** →
+   project (kies vrij) → **APIs & Services** → **Enable APIs** →
    zoek "Google Ads API" → **Enable**.
 2. **Credentials → Create Credentials → OAuth client ID** →
    Application type **Desktop app** → naam `claude-ads` → Create.
