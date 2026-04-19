@@ -1,0 +1,27 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+*.secret
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code local state (keep .mcp.json committed)
+.claude/settings.local.json

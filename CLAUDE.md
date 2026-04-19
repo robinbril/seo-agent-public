@@ -1,10 +1,15 @@
-# SEO Agent - Claude Code Setup
+# Robin's Marketing Engine — Claude Code Setup
 
-Je bent een SEO agent voor [DOMAIN]. Je hebt toegang tot scripts die Brave Search en web scraping gebruiken voor keyword research, competitor analyse, ranking tracking, en backlink building.
+Je bent een full-stack marketing agent voor [DOMAIN]. Je combineert organische SEO
+(keyword research, competitor analyse, content, backlinks, rankings) met betaalde
+campagnes op Meta Ads en Google Ads, per klant geïsoleerd via MCP servers.
 
 ## Vereisten
 - `BRAVE_API_KEY` in environment (verplicht voor alle zoekfuncties)
 - `ANTHROPIC_API_KEY` in environment (optioneel, voor outreach_generator met AI)
+- Voor ads-beheer (Meta + Google Ads): zie `docs/ADS-MCP-SETUP.md` en vul `.env`
+  in op basis van `.env.example`. Claude Code leest `.mcp.json` automatisch en
+  start per-klant MCP servers (`meta-ads-<client>`, `google-ads-<client>`).
 
 ## Configuratie
 Config staat in `config.json`. Brand voice in `brand.md`. **Vul beide volledig in voor gebruik.**
@@ -149,3 +154,44 @@ Geef site mee bij commando's:
 - Rankings bijhouden: run weekly tracker elke maandag
 - NAP data voor citations: gebruik ALTIJD exact dezelfde naam/adres/telefoon
 - Backlinks: kwaliteit > kwantiteit. Focus op DR40+ relevante sites
+
+---
+
+## Ads Management (Meta + Google Ads)
+
+Per klant worden MCP servers `meta-ads-<client>` en `google-ads-<client>`
+ingeladen via `.mcp.json`. Setup: `docs/ADS-MCP-SETUP.md`.
+
+### 📊 Ads Performance Check
+```
+Check ads performance for [client] last [N] days
+```
+1. `meta-ads-<client>` → `get_insights`
+2. `google-ads-<client>` → `get_campaign_performance`
+3. Combineer ROAS/CPC/CTR + top-performing ads/keywords
+4. Schrijf rapport naar `sites/<client>/rankings/ads-report-YYYY-MM-DD.md`
+
+### 🚀 Nieuwe Campagne Live Zetten
+```
+Launch new [platform] campaign for [client] targeting [topic] with budget €X/day
+```
+1. Check budget + spending limit
+2. Toon concept: campaign name, objective, targeting, creative brief
+3. **ALTIJD eerst bevestiging vragen** vóór `create_campaign`
+4. Na approval: `create_campaign` → `create_ad_set` → `create_ad` (Meta) of
+   `create_campaign` → `create_ad_group` → `add_keywords` (Google)
+5. Log wijziging naar `sites/<client>/rankings/ads-changelog.md`
+
+### ⏸️ Pauze / Budget Aanpassen
+```
+Pause [campaign name] for [client]
+Set budget of [campaign name] to €X/day for [client]
+```
+Toon **altijd** current status + bevestiging vragen vóór mutation.
+
+### Safety rules
+- **NOOIT** `create_*` / `update_*_budget` / `update_*_status` zonder
+  expliciete bevestiging van de user.
+- Log iedere mutation in `sites/<client>/rankings/ads-changelog.md` met
+  timestamp, tool, params, resultaat.
+- Respecteer daily spending limits. Bij twijfel: vraag.
