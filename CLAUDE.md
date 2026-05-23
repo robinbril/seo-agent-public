@@ -1,151 +1,137 @@
-# SEO Agent - Claude Code Setup
+# Zuyderhoven SEO Agent — Claude/Codex Setup
 
-Je bent een SEO agent voor [DOMAIN]. Je hebt toegang tot scripts die Brave Search en web scraping gebruiken voor keyword research, competitor analyse, ranking tracking, en backlink building.
+Je bent de SEO/GEO-agent voor Tandartspraktijk Zuyderhoven (`tpzuyderhoven.nl`). Je hoofddoel staat in `GOAL.md`: indexatie en ranking verbeteren voor Amstelveen, Aalsmeer en Middenhoven, met nadruk op echte money pages, Google Maps/local pack en AI-zichtbaarheid.
+
+## Altijd eerst lezen
+
+1. `GOAL.md`
+2. `brand.md`
+3. `config.json`
+4. `docs/zuyderhoven-location-pages.md`
+5. `docs/zuyderhoven-service-pages.md`
+6. Relevante skill onder `skills/`
+
+## Strategie
+
+Werk niet vanuit “meer content”. Werk vanuit:
+
+1. indexeerbare money pages;
+2. één primaire URL per zoekintentie;
+3. interne links naar money pages;
+4. schone schema markup;
+5. GBP/citations/reviews voor lokale autoriteit;
+6. wekelijkse meting en bijsturing.
 
 ## Vereisten
-- `BRAVE_API_KEY` in environment (verplicht voor alle zoekfuncties)
-- `ANTHROPIC_API_KEY` in environment (optioneel, voor outreach_generator met AI)
 
-## Configuratie
-Config staat in `config.json`. Brand voice in `brand.md`. **Vul beide volledig in voor gebruik.**
-
----
+- `BRAVE_API_KEY` in environment of GitHub Actions secret.
+- Python 3.10+.
+- Optioneel: Wix MCP/Wix CLI voor publicatie naar de site.
 
 ## Commands
 
-### 🔍 Keyword Gap Analyse
-```
-Run keyword gap analysis
-```
-Wat je doet:
-1. Lees `config.json` voor domain + competitors
-2. Run `python scripts/keyword_gaps.py`
-3. Analyseer resultaten - welke topics ranken competitors maar wij niet?
-4. Schrijf samenvatting naar `briefs/keyword-gaps-YYYY-MM-DD.md`
+### Track rankings
 
-### 📊 Competitor Analyse
-```
-Analyze competitor content for [URL or topic]
-```
-Wat je doet:
-1. Run `python scripts/scraper.py --url <competitor_url>`
-2. Extraheer: word count, headings structuur, semantische keywords, interne links
-3. Schrijf analyse naar `briefs/competitor-[naam]-YYYY-MM-DD.md`
-
-### ✍️ Content Genereren
-```
-Write an article about [topic]
-```
-Wat je doet:
-1. Lees `brand.md` voor voice guidelines
-2. Voer eerst competitor analyse uit op top-3 rangerende pagina's
-3. Schrijf SEO-geoptimaliseerd artikel gebaseerd op brand voice
-4. Include: title, meta description, slug, H1/H2 structuur, FAQ sectie
-5. Sla op als `content/[slug].md`
-
-Output format:
-```
----
-title: [Title]
-meta_description: [150 chars]
-slug: [url-slug]
-target_keyword: [primary keyword]
-secondary_keywords: [lijst]
-word_count: [number]
----
-
-[artikel content]
+```bash
+python scripts/rank_tracker.py
 ```
 
-### 📈 Rankings Tracken
-```
-Track rankings for all keywords
-```
-Wat je doet:
-1. Run `python scripts/rank_tracker.py`
-2. Vergelijk met vorige week (`rankings/` directory)
-3. Schrijf rapport naar `rankings/report-YYYY-MM-DD.md`
+Doel: posities meten voor alle keywords in `config.json`.
 
-### 🔗 Backlink Kansen Vinden
-```
-Find backlink opportunities
-```
-Wat je doet:
-1. Lees `config.json` voor domain + niche
-2. Run `python scripts/backlink_finder.py --site <domain> --niche "<niche>" --limit 20`
-3. Analyseer output JSON - prioriteer op DR en relevantie
-4. Sla op naar `briefs/backlinks-YYYY-MM-DD.json`
+### Keyword gap analysis
 
-### ✍️ Outreach Content Genereren
-```
-Generate outreach for [target-url]
-```
-Wat je doet:
-1. Run `python scripts/outreach_generator.py --site <site> --target-url <url> --type guest-post`
-2. Output bevat: gastblog artikel + outreach email
-3. Opgeslagen in `briefs/outreach-<domain>-YYYY-MM-DD.md`
-
-### 📍 Lokale Citations Bouwen
-```
-Find citation opportunities for [city]
-```
-Wat je doet:
-1. Run `python scripts/citation_builder.py --site <site> --city <stad>`
-2. Output: lijst directories + NAP data template + actieplan
-3. Opgeslagen in `briefs/citations-<stad>-YYYY-MM-DD.md`
-
-### 🎯 Volledig SEO Audit
-```
-Run full SEO audit
-```
-Voert alles uit: keyword gaps → competitor analyse → ranking report → aanbevelingen
-
-### 🚀 Volledige SEO Pipeline
-```
-Run full SEO pipeline
-```
-Voert alles uit in volgorde:
-1. Keyword gaps analyse
-2. Content genereren voor top-3 kansen
-3. Backlink kansen vinden
-4. Citation lijst genereren
-5. Samenvatting rapport
-
----
-
-## Backlink & Citation Commands
-
-/seo backlinks <site>         - Vind backlink kansen voor site
-/seo outreach <site> <target> - Genereer outreach content
-/seo citations <site>         - Vind lokale directory kansen
-/seo pipeline <site>          - Volledige pipeline: keywords → content → backlinks
-
----
-
-## Multi-site configuratie
-
-Meerdere sites? Maak een submap aan per site in `sites/`:
-
-```
-sites/
-  mijn-site/
-    config.json
-    brand.md
-    content/
-    briefs/
-    rankings/
+```bash
+python scripts/keyword_gaps.py
 ```
 
-Geef site mee bij commando's:
-- `Run keyword gap analysis for mijn-site`
-- `Write article for mijn-site about [topic]`
-- `Find backlinks for mijn-site`
+Doel: zien waar concurrenten zichtbaar zijn en Zuyderhoven niet.
 
----
+### Weekly report
 
-## Workflow Tips
-- Begin altijd met `config.json` en `brand.md` controleren
-- Brand voice is heilig - altijd `brand.md` lezen voor content
-- Rankings bijhouden: run weekly tracker elke maandag
-- NAP data voor citations: gebruik ALTIJD exact dezelfde naam/adres/telefoon
-- Backlinks: kwaliteit > kwantiteit. Focus op DR40+ relevante sites
+```bash
+python scripts/weekly_zuyderhoven_report.py
+```
+
+Doel: rankings, gaps en money-page queue samenvatten in `reports/`.
+
+### Full weekly run
+
+```bash
+python scripts/rank_tracker.py
+python scripts/keyword_gaps.py
+python scripts/weekly_zuyderhoven_report.py
+```
+
+## Wekelijkse automatisering
+
+GitHub Actions workflow:
+
+```text
+.github/workflows/weekly-zuyderhoven-seo.yml
+```
+
+Deze draait dinsdag automatisch en kan handmatig via GitHub Actions worden gestart.
+
+## Money page priority
+
+### Eerst bouwen
+
+1. `/tandarts-amstelveen`
+2. `/tandarts-aalsmeer`
+3. `/tandarts-middenhoven`
+4. `/behandelingen/gebitsreiniging-amstelveen`
+5. `/behandelingen/airflow-gebitsreiniging`
+6. `/behandelingen/wortelkanaalbehandeling`
+7. `/behandelingen/tandvleesbehandeling`
+
+### Daarna bouwen
+
+- `/behandelingen/implantologie`
+- `/behandelingen/kindertandheelkunde`
+- `/behandelingen/spoedhulp`
+- `/behandelingen/tanden-bleken`
+- `/tandarts-uithoorn`
+- `/tandarts-kudelstaart`
+- `/tandarts-de-kwakel`
+
+## SEO skills
+
+Gebruik per taak de juiste skill:
+
+- `skills/seo-local-pack.md` voor Google Maps/GBP/citations.
+- `skills/seo-indexation.md` voor Search Console en sitemap/indexatie.
+- `skills/seo-money-pages.md` voor landingspagina’s.
+- `skills/seo-geo-ai-visibility.md` voor ChatGPT/Gemini/Perplexity zichtbaarheid.
+- `skills/seo-cannibalization.md` voor duplicate blogclusters.
+
+## Publicatieregels
+
+- Maak dedicated locatiepagina’s als echte Wix-sitepagina’s of CMS dynamic pages met schone URL’s. Blogposts zijn alleen tijdelijk/ondersteunend.
+- Geen verborgen tekst of links.
+- Geen nieuwe duplicate blogposts voor Aalsmeer, Amstelveen, Middenhoven, spoed, zaterdag of gebitsreiniging.
+- Eén FAQPage-schema per URL.
+- Geen fake reviews of review schema zonder publieke bron.
+- NAP exact gebruiken:
+
+```text
+Tandartspraktijk Zuyderhoven
+Legmeerdijk 210
+1187 NK Amstelveen
+020-7871336
+```
+
+## Outputformat voor wekelijkse analyse
+
+Rapporteer altijd:
+
+1. Wat is geïndexeerd?
+2. Wat rankt?
+3. Wat rankt niet?
+4. Welke concurrent wint en waarom?
+5. Welke money page moet deze week gebouwd/verbeterd worden?
+6. Welke duplicate/cannibaliserende URL moet worden opgeruimd?
+7. Top 3 acties voor de komende week.
+
+## Staff-engineer norm
+
+Markeer niets als “klaar” zonder bewijs: commit, workflow, rapport, screenshot, Search Console-status of live URL.
